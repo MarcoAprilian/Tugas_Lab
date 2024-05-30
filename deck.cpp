@@ -1,9 +1,3 @@
-#include <iostream>
-#include <vector>
-#include <random>
-#include <algorithm>
-using namespace std;
-
 vector<int> generate_deck()
 {
     int Ace = 1;
