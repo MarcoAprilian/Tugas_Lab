@@ -1,14 +1,14 @@
 vector<int> generate_deck()
 {
     int Ace = 1;
-    int J = 11;
-    int Q = 12;
-    int K = 13;
+    int J = 10;
+    int Q = 10;
+    int K = 10;
 
     vector <int> deck = {  Ace,2,3,4,5,6,7,8,9,10,J,Q,K,
-              Ace,2,3,4,5,6,7,8,9,10,J,Q,K,
-              Ace,2,3,4,5,6,7,8,9,10,J,Q,K,
-              Ace,2,3,4,5,6,7,8,9,10,J,Q,K };
+                           Ace,2,3,4,5,6,7,8,9,10,J,Q,K,
+                           Ace,2,3,4,5,6,7,8,9,10,J,Q,K,
+                           Ace,2,3,4,5,6,7,8,9,10,J,Q,K };
     
     return deck;
 
