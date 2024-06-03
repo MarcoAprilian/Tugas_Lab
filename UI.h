@@ -30,7 +30,7 @@ void instruksi()
     cout << "                                  How to Play                                  " << endl;
     garis();
     cout << " Tujuan dari permainan ini adalah mencapai kemenangan melawan dealer (bot)     " << endl;
-    cout << " dengan cara memiliki kartu di tangan player dengan jumlah paling mendekati    " << endl;
+    cout << " dengan cara memiliki kartu di tangan dengan jumlah paling mendekati    " << endl;
     cout << " angka 21 atau berjumlah 21.                                                   " << endl;
     cout << endl;
     cout << " Cara Main :                                                                   " << endl;
@@ -47,7 +47,7 @@ void instruksi()
     cout << "     dengan jumlah kartu dealer.                                               " << endl;
     cout << "  6. Kartu Jack, Queen, dan King memiliki nilai berupa 10.                     " << endl;
     cout << "  7. Jika player memiliki kartu Ace dan kartu 10/Jack/Queen/King di tangan,    " << endl;
-    cout << "     Player langsung dikatakan menang.                                         " << endl;
+    cout << "     Player langsung dinyatakan menang.                                         " << endl;
     garis();
     cout << endl;
     system("pause");
