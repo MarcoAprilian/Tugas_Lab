@@ -87,7 +87,7 @@ auto interfaceplayer(vector <int> ph)
     }
 
 auto interfacedealer(vector <int> dh, bool cond)
-    {     
+    {   
         if (cond == false) 
             {
                 cout<<"Kartu dealer     :";
@@ -117,18 +117,18 @@ int main()
        system("CLS");
 
             vector <int> deck = generate_deck();
-            deck = shuffle(deck);
-            
             vector <int> playerhand;
             vector <int> dealerhand;
+            deck = shuffle(deck);
+            
+           
 
             for (int i = 0 ; i<=1 ; i++)
                 {
                     playerhand.push_back(deck[0]);
                     deck.erase(deck.begin());
                     dealerhand.push_back(deck[0]);
-                    deck.erase(deck.begin());
-            
+                    deck.erase(deck.begin());            
                 }
 
             char pil;
@@ -142,25 +142,25 @@ int main()
             cout<<"Hit or Stand (H/S) "<<endl;
             cin>>pil;
             
-
             int sumph = accumulate(playerhand.begin(),playerhand.end(),0);
             int sumdh = accumulate(dealerhand.begin(),dealerhand.end(),0);
 
             if (tolower(pil) == 'h')
                 {
                     playerhand.push_back(deck[0]);
-                    deck.erase(deck.begin());
-                    
+                    deck.erase(deck.begin());                    
                 }
+
             else if (tolower(pil) == 's')
                 {   
+                    system ("CLS");
                     cd=true;
                     while (sumdh<17)
-                    {
-                        dealerhand.push_back(deck[0]);
-                        deck.erase(deck.begin());
-                        sumdh = accumulate(dealerhand.begin(),dealerhand.end(),0);
-                    }
+                        {
+                            dealerhand.push_back(deck[0]);
+                            deck.erase(deck.begin());
+                            sumdh = accumulate(dealerhand.begin(),dealerhand.end(),0);
+                        }
                     
                     interfaceplayer(playerhand);
                     interfacedealer(dealerhand, cd);
