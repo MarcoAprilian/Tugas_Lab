@@ -193,10 +193,11 @@ int main()
             if (sumph < 21)
                 goto hit;
 
-            cout<<endl;    
+             
             checkwin(sumph,sumdh);
             cout<<endl;
 
+         
             system("pause");
 
             uji:
