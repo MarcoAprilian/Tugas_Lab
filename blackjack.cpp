@@ -6,67 +6,72 @@
 #include <conio.h>
 using namespace std;
 
-vector <int> generate_deck()
-{
-    int Ace = 1;
-    int J = 10;
-    int Q = 10;
-    int K = 10;
+class deck_struct {
+    public :
+    vector <int> generate_deck()
+        {
+            int Ace = 1;
+            int J = 10;
+            int Q = 10;
+            int K = 10;
 
-    vector <int> deck = {  Ace,2,3,4,5,6,7,8,9,10,J,Q,K,
-              Ace,2,3,4,5,6,7,8,9,10,J,Q,K,
-              Ace,2,3,4,5,6,7,8,9,10,J,Q,K,
-              Ace,2,3,4,5,6,7,8,9,10,J,Q,K };
-    
-    return deck;
+            vector <int> deck = {  Ace,2,3,4,5,6,7,8,9,10,J,Q,K,
+                    Ace,2,3,4,5,6,7,8,9,10,J,Q,K,
+                    Ace,2,3,4,5,6,7,8,9,10,J,Q,K,
+                    Ace,2,3,4,5,6,7,8,9,10,J,Q,K };
+            
+            return deck;
 
-}
+        }
 
-vector <int> shuffle(vector<int>deck)
-{
-    random_device rd;
-    mt19937 g(rd()^ chrono::system_clock::now().time_since_epoch().count());
-    shuffle(deck.begin(), deck.end(), g);
+    public :
+    vector <int> shuffle_card(vector<int>deck)
+        {
+            random_device rd;
+            mt19937 g(rd()^ chrono::system_clock::now().time_since_epoch().count());
+            shuffle(deck.begin(), deck.end(), g);
 
-    return deck;
-}
+            return deck;
+        }
 
-vector <int> print_deck(vector<int>deck)
-{
-    for (int i = 0; i < deck.size(); i++)
-    {
-      cout << deck[i] << " , ";
-      if (i % 13 == 0) cout << endl;
-    }
-    return deck;
-}
+    public :
+    vector <int> print_deck(vector<int>deck)
+        {
+            for (int i = 0; i < deck.size(); i++)
+            {
+            cout << deck[i] << " , ";
+            if (i % 13 == 0) cout << endl;
+            }
+            return deck;
+        }
 
+};
 
 void checkwin(int playerhand, int dealerhand){
 
     if (playerhand == 21 && dealerhand == 21) {
-        cout<<"Blackjack push"<<endl;
+        cout<<"     BLACKJACK PUSH"<<endl;
     } else
     if (playerhand == 21 && dealerhand != 21) {
-        cout<<"Blackjack win"<<endl;
+        cout<<"     BLACKJACK WIN"<<endl;
     } else
     if (playerhand != 21 && dealerhand == 21) {
-        cout<<"Dealer Blackjack, lose"<<endl;
+        cout<<"     DEALER BLACK JACK, YOU LOSE"<<endl;
     } else
     if (playerhand < 21 && playerhand > dealerhand) {
-        cout<<" Wins"<<endl;
+        cout<<"     YOU WIN"<<endl;
     } else
     if (playerhand > 21) {
-        cout<<" Bust, lost"<<endl;
+        cout<<"     BUST LOST"<<endl;
     } else 
     if (dealerhand > 21) {
-        cout<<" Dealer Bust, Win"<<endl;
+        cout<<"     DEALER BUST, YOU WIN"<<endl;
     }else
     if (playerhand == dealerhand) {
-        cout<<" Push"<<endl;
+        cout<<"     PUSH"<<endl;
     } else
     if (playerhand < dealerhand) {
-        cout<<" Lose"<<endl;
+        cout<<"     YOU LOSE"<<endl;
     }    
 }
 
@@ -82,8 +87,6 @@ auto interfaceplayer(vector <int> ph)
             }
         printf("   (total = %d)", total);
         cout<<endl;  
-
-
     }
 
 auto interfacedealer(vector <int> dh, bool cond)
@@ -112,14 +115,15 @@ auto interfacedealer(vector <int> dh, bool cond)
 
 int main()
 {   
+    deck_struct card;
     ulang:
     bool cd = false;
        system("CLS");
 
-            vector <int> deck = generate_deck();
+            vector <int> deck = card.generate_deck();
             vector <int> playerhand;
             vector <int> dealerhand;
-            deck = shuffle(deck);
+            deck = card.shuffle_card(deck);
             
            
 
@@ -164,7 +168,9 @@ int main()
                     
                     interfaceplayer(playerhand);
                     interfacedealer(dealerhand, cd);
+                    cout<<endl;
                     checkwin(sumph,sumdh);
+                    cout<<endl;
                     system("pause");
                     goto gameover;
                 }
@@ -179,27 +185,32 @@ int main()
             sumdh = accumulate(dealerhand.begin(),dealerhand.end(),0);
             
             if (sumph < 21)
-                {
-                        goto hit;
-                }
-                
+                goto hit;
+
+            cout<<endl;    
             checkwin(sumph,sumdh);
+            cout<<endl;
+
             system("pause");
+
+            uji:
+            system("CLS");
 
             char lagi;
             gameover:
-            cout<<"Main lagi???? (Y/N)";
+           
+            cout<<"Main lagi???? (Y/N)"<<endl;
             cin>>lagi;
 
             if (tolower(lagi) == 'y')
-                {
-                    goto ulang;
-                }
+                goto ulang;
 
-            else
-                {
-                    cout<<"Terimakasih Sudah Bermain :)))";
-                }
+            else if (tolower(lagi) == 'y')
+                cout<<"Terimakasih Sudah Bermain :)))";
+
+            else 
+                goto uji;
+                
 
 
             return 0;
