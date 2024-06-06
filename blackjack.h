@@ -8,7 +8,8 @@
 
 using namespace std;
 
-class deck_struct {
+class deck_struct 
+{
     public :
     vector <int> generate_deck()
         {
@@ -17,13 +18,12 @@ class deck_struct {
             int Q = 10;
             int K = 10;
 
-            vector <int> deck = {  Ace,2,3,4,5,6,7,8,9,10,J,Q,K,
-                    Ace,2,3,4,5,6,7,8,9,10,J,Q,K,
-                    Ace,2,3,4,5,6,7,8,9,10,J,Q,K,
-                    Ace,2,3,4,5,6,7,8,9,10,J,Q,K };
+            vector <int> deck = {   Ace,2,3,4,5,6,7,8,9,10,J,Q,K,
+                                    Ace,2,3,4,5,6,7,8,9,10,J,Q,K,
+                                    Ace,2,3,4,5,6,7,8,9,10,J,Q,K,
+                                    Ace,2,3,4,5,6,7,8,9,10,J,Q,K };
             
             return deck;
-
         }
 
     public :
@@ -40,88 +40,93 @@ class deck_struct {
     vector <int> print_deck(vector<int>deck)
         {
             for (int i = 0; i < deck.size(); i++)
-            {
-            cout << deck[i] << " , ";
-            if (i % 13 == 0) cout << endl;
-            }
+                {
+                    cout << deck[i] << " , ";
+                    if (i % 13 == 0) cout << endl;
+                }
             return deck;
         }
-
 };
 
 
 void checkwin(int playerhand, int dealerhand, int *ptruang, int bet)
 {
-    garis();
+        garis();
+
     if (playerhand == 21 && dealerhand == 21) {
-        cout<<"     BLACKJACK PUSH"<<endl;
+        cout << "   BLACKJACK PUSH" << endl;
     } else
     if (playerhand == 21 && dealerhand != 21) {
-        cout<<"     BLACKJACK WIN"<<endl;
+        cout << "   BLACKJACK WIN" << endl;
             *ptruang += bet;
     } else
     if (playerhand != 21 && dealerhand == 21) {
-        cout<<"     DEALER BLACK JACK, YOU LOSE"<<endl;
+        cout << "   DEALER BLACK JACK, YOU LOSE" << endl;
             *ptruang -= bet;
     } else
     if (playerhand < 21 && playerhand > dealerhand) {
-        cout<<"     YOU WIN"<<endl;
+        cout << "   YOU WIN" << endl;
             *ptruang += bet;
     } else
     if (playerhand > 21) {
-        cout<<"     BUST LOST"<<endl;
+        cout << "   BUST LOST" << endl;
             *ptruang -= bet;
     } else 
     if (dealerhand > 21) {
-        cout<<"     DEALER BUST, YOU WIN"<<endl;
+        cout <<"    DEALER BUST, YOU WIN" << endl;
             *ptruang += bet;
     }else
     if (playerhand == dealerhand) {
-        cout<<"     PUSH"<<endl;
+        cout << "   PUSH" << endl;
     } else
     if (playerhand < dealerhand) {
-        cout<<"     YOU LOSE"<<endl;
+        cout << "   YOU LOSE" << endl;
             *ptruang -= bet;
-    }    
+    }
 }
 
 
 auto interfaceplayer(vector <int> ph)
-    {   
-            UI_atas();   
-        int total = 0;
-        cout<<"Kartu anda       :";
-        for (int i = 0 ; i< ph.size() ; i++)
-            {   
-                cout<<ph[i]<<" ";
-                total += ph[i];
-            }
-        printf("   (total = %d)", total);
-        cout<<endl;  
-    }
+{   
+        UI_atas();  
+
+    int total = 0;
+    cout << "Kartu anda       :";
+    for (int i = 0 ; i< ph.size() ; i++)
+        {   
+            cout<<ph[i]<<" ";
+            total += ph[i];
+        }
+    cout << "(Total = " << total << ")";
+
+        cout << endl;  
+}
+
 
 auto interfacedealer(vector <int> dh, bool cond)
-    {   
-        if (cond == false) 
-            {
-                cout<<"Kartu dealer     :";
-                for (int i = 0 ; i < (dh.size()-1) ; i++)
-                    {   
-                        cout<<dh[i]<<" ";
-                    }
-                cout<<endl;  
-            }       
+{   
+    if (cond == false) 
+        {
+            cout << "Kartu dealer     :";
+            for (int i = 0 ; i < (dh.size()-1) ; i++)
+                {   
+                    cout<<dh[i]<<" ";
+                }
 
-        else if (cond == true)    
-            {
-                cout<<"Kartu dealer     :";
-                for (int i = 0 ; i < (dh.size()) ; i++)
-                    {   
-                        cout<<dh[i]<<" ";
-                    }
-                cout<<endl;  
-            }
-    }
+            cout << endl;  
+        }       
+
+    else if (cond == true)    
+        {
+            cout << "Kartu dealer     :";
+            for (int i = 0 ; i < (dh.size()) ; i++)
+                {   
+                    cout<<dh[i]<<" ";
+                }
+
+            cout << endl;  
+        }
+}
 
 
 void blackjack()
@@ -133,120 +138,132 @@ void blackjack()
     int bet;
 
     deck_struct card;
+
     ulang:
     bool cd = false;
-       system("CLS");
 
-            vector <int> deck = card.generate_deck();
-            vector <int> playerhand;
-            vector <int> dealerhand;
-            deck = card.shuffle_card(deck);
+        system("CLS");
+
+    vector <int> deck = card.generate_deck();
+    deck = card.shuffle_card(deck);
+    vector <int> playerhand;
+    vector <int> dealerhand;
+    
+    bet = *ptruang + 1;
+    while (bet > *ptruang)
+        {
+                UI_atas();    
+
+            cout << "Your Point = " << *ptruang << endl;
+            cout << "Pasang Taruhan: ";
+            cin >> bet;     
+        }
+
+    for (int i = 0 ; i<=1 ; i++)
+        {
+            playerhand.push_back(deck[0]);
+            deck.erase(deck.begin());
             
-            bet=*ptruang+1;
-            while (bet > *ptruang)
-            {
-                cout << "Your Point = " << *ptruang << endl;
-                cout << "Pasang Taruhan: ";
-                cin >> bet;     
-            }
+            dealerhand.push_back(deck[0]);
+            deck.erase(deck.begin());            
+        }
 
-            for (int i = 0 ; i<=1 ; i++)
-                {
-                    playerhand.push_back(deck[0]);
-                    deck.erase(deck.begin());
-                    dealerhand.push_back(deck[0]);
-                    deck.erase(deck.begin());            
-                }
+    char pil;
 
-            char pil;
+    hit:
 
-            hit:
-            system("CLS");
+        system("CLS");
 
-            interfaceplayer(playerhand);
-            interfacedealer(dealerhand,cd);
-                garis();
-            cout<<"Hit or Stand (H/S) "<<endl;
-            pil= _getch(); 
-            
-            int sumph = accumulate(playerhand.begin(),playerhand.end(),0);
-            int sumdh = accumulate(dealerhand.begin(),dealerhand.end(),0);
+    interfaceplayer(playerhand);
+    interfacedealer(dealerhand,cd);
 
-            if (tolower(pil) == 'h')
-                {
-                    playerhand.push_back(deck[0]);
-                    deck.erase(deck.begin());                    
-                }
+        garis();
 
-            else if (tolower(pil) == 's')
-                {   
+    cout << "Hit or Stand (H/S) " << endl;
+    pil= _getch(); 
+    
+    int sumph = accumulate(playerhand.begin(),playerhand.end(),0);
+    int sumdh = accumulate(dealerhand.begin(),dealerhand.end(),0);
+
+    if (tolower(pil) == 'h')
+        {
+            playerhand.push_back(deck[0]);
+            deck.erase(deck.begin());
+
+        } else if (tolower(pil) == 's')
+            {   
                     system ("CLS");
-                    cd=true;
-                    while (sumdh<17)
-                        {
-                            dealerhand.push_back(deck[0]);
-                            deck.erase(deck.begin());
-                            sumdh = accumulate(dealerhand.begin(),dealerhand.end(),0);
-                        }
-                    
-                    interfaceplayer(playerhand);
-                    interfacedealer(dealerhand, cd);
-                    cout<<endl;
-                    checkwin(sumph, sumdh, ptruang, bet);
-                    if (*ptruang <= 0)
-                        {
-                            goto go2;
-                        }
-                    cout << "Your Point = " << *ptruang << endl;
-                    cout<<endl;
-                    system("pause");
-                    goto gameover;
-                }
 
-            system("CLS");
-            interfaceplayer(playerhand);
-            interfacedealer(dealerhand, cd);
-
-            
-
-            sumph = accumulate(playerhand.begin(),playerhand.end(),0);
-            sumdh = accumulate(dealerhand.begin(),dealerhand.end(),0);
-            
-            if (sumph < 21)
-                goto hit;
-
-             
-            checkwin(sumph, sumdh, ptruang, bet);
-            if (*ptruang <= 0)
+                cd=true;
+                while (sumdh<17)
                     {
-                        goto go2;
+                        dealerhand.push_back(deck[0]);
+                        deck.erase(deck.begin());
+                        sumdh = accumulate(dealerhand.begin(),dealerhand.end(),0);
                     }
-            cout << "Your Credit= " << *ptruang << "$" << endl;
-            cout<<endl;
-
-         
-            system("pause");
-
-            uji:
-            system("CLS");
-
-            char lagi;
-            gameover:
-           
-            UI_atas();
-            cout<<"Main lagi???? (Y/N)"<<endl;
-            lagi = _getch(); 
-
-            if (tolower(lagi) == 'y')
-                goto ulang;
-
-            else if (tolower(lagi) == 'n'){
-                go2:
-                cout<<"Terimakasih Sudah Bermain :)))";
-            }
-            else 
-                goto uji;
                 
+                interfaceplayer(playerhand);
+                interfacedealer(dealerhand, cd);
+                checkwin(sumph, sumdh, ptruang, bet); 
 
+                if (*ptruang <= 0) goto go2;
 
+                    garis();
+
+                cout << endl << "Your Point = " << *ptruang << endl;
+
+                    cout << endl;
+                    system("pause");
+
+                goto gameover;
+            }
+
+        system("CLS");
+
+    interfaceplayer(playerhand);
+    interfacedealer(dealerhand, cd);
+
+    sumph = accumulate(playerhand.begin(),playerhand.end(),0);
+    sumdh = accumulate(dealerhand.begin(),dealerhand.end(),0);
+    
+    if (sumph < 21) goto hit;
+
+    checkwin(sumph, sumdh, ptruang, bet);
+    if (*ptruang <= 0) goto go2;
+        
+        garis();
+        
+    cout << endl << "Your Credit= " << *ptruang << "$" << endl;
+    cout << endl;
+    
+        system("pause");
+
+    uji:
+
+        system("CLS");
+
+    gameover:
+
+        system("CLS");
+        UI_atas();
+
+    char lagi;
+
+    cout << "                                Play Again ???? "    << endl;
+    cout << "                            Yes(Y)            No(N)" << endl;
+
+        garis();
+
+    lagi = _getch(); 
+
+    if (tolower(lagi) == 'y') goto ulang;
+    else if (tolower(lagi) == 'n')
+        {
+            go2:
+
+                garis();
+            cout << "                       Terimakasih Sudah Bermain :)))" << endl;
+                garis();
+        } 
+    else goto uji;
 }
