@@ -3,7 +3,7 @@ using namespace std;
 
 void garis()
 {
-    cout << "===============================================================================" << endl;
+    cout << "================================================================================" << endl;
 }
 
 void UI_atas()
@@ -17,20 +17,16 @@ void UI_atas()
     garis();
 }
 
-auto play()
-{
-    return 0;
-}
 
-void instruksi()
+void manual()
 {
         system("CLS");
 
-    garis();
+        garis();
     cout << "                                  How to Play                                  " << endl;
-    garis();
+        garis();
     cout << " Tujuan dari permainan ini adalah mencapai kemenangan melawan dealer (bot)     " << endl;
-    cout << " dengan cara memiliki kartu di tangan dengan jumlah paling mendekati    " << endl;
+    cout << " dengan cara memiliki kartu di tangan player dengan jumlah paling mendekati    " << endl;
     cout << " angka 21 atau berjumlah 21.                                                   " << endl;
     cout << endl;
     cout << " Cara Main :                                                                   " << endl;
@@ -47,16 +43,14 @@ void instruksi()
     cout << "     dengan jumlah kartu dealer.                                               " << endl;
     cout << "  6. Kartu Jack, Queen, dan King memiliki nilai berupa 10.                     " << endl;
     cout << "  7. Jika player memiliki kartu Ace dan kartu 10/Jack/Queen/King di tangan,    " << endl;
-    cout << "     Player langsung dinyatakan menang.                                         " << endl;
-    garis();
-    cout << endl;
-    system("pause");
+    cout << "     Player langsung dikatakan menang.                                         " << endl;
+        garis();
+        cout << endl;
 }
 
-void tampilan_utama()
+auto tampilan_utama()
 {
-    int pilihan;
-    char space;
+    char pilihan;
 
     ulang:
 
@@ -95,18 +89,16 @@ void tampilan_utama()
     cout << " 2. How to Play                                                                " << endl;
     garis();
     cout << " Pilihan Anda : ";
-    cin >> pilihan;
+    pilihan = _getch();
 
-    switch (pilihan)
-    {
-        case 1  : play();
-                  break;
+    if (pilihan == '1') return 0;
+    else if (pilihan == '2')
+        {
+            manual();
 
-        case 2  : instruksi();
-                  goto ulang;
-                  break;
+                system("pause");
 
-        default : break;
-    }
-    
+            goto ulang;
+        }
+    else goto ulang;
 }   
