@@ -1,0 +1,33 @@
+//tgndiambil = yg ditanya, tgnpenerima = yg bertanya
+auto tarik_kartu (vector <string> tgndiambil, vector <string> tgnpenerima, string kartu_diminta, vector <string> deck, bool* replay)
+    {
+        auto cekopp = find(tgndiambil.begin(), tgndiambil.end(), (kartu_diminta));
+        if (cekopp != tgndiambil.end())
+            { 
+                int sz = tgndiambil.size();
+                int j = 0;
+                for (j = 0 ; j < sz ; j++)
+                {
+                    
+                    if (kartu_diminta == tgndiambil[j]) 
+                        {
+                            tgnpenerima.push_back(kartu_diminta);
+                            auto removeIt =remove_if(tgndiambil.begin(), tgndiambil.end(), [&](const string& word) { return word == kartu_diminta; });
+                            tgndiambil.erase(removeIt,tgndiambil.end());
+
+                            *replay = true;
+                            return tgnpenerima;
+                        }
+                }
+            } 
+        else
+            {
+                tgnpenerima.push_back(deck[0]);
+                deck.erase(deck.begin());
+                cout<<"GO FISH!!" << endl;
+                return ;
+                
+            }
+    
+    }
+
