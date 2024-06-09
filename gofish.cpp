@@ -5,7 +5,6 @@
 #include <chrono>
 #include <conio.h>
 #include <unordered_map>
-#include "UI.h"
 #include <cctype>
 #include <string>
 
@@ -46,17 +45,6 @@ vector <string> shuffle_card(vector<string>deck)
         return deck;
     }
 
-vector <string> print_deck(vector<string>deck)
-    {
-        for (int i = 0; i < deck.size(); i++)
-        {
-        cout << deck[i] << " , ";
-        if (i % 13 == 0) cout << endl;
-        }
-        return deck;
-    }
-
-
 vector <string> cekfour (vector <string> hand )
     {
         unordered_map <string, int> count;
@@ -78,7 +66,29 @@ vector <string> cekfour (vector <string> hand )
         return hand;
     }
 
+void printhand(vector <string> hand)
+    {
+           for (int j = 0 ; j < hand.size() ; j++)
+            {
+                cout<<hand[j]<<" ";
+            }
+    }
+
+int handsize(vector <string> hand)
+    {
+        int x  = hand.size();
+        return x;
+    }
+
+void interface_gf (vector <string> ownhand, vector <string> opohand, vector <string> dek)
+    {
+        cout<<"Tangan lawan = " << opohand.size() << "          " << "Deck = " << dek.size();
+        cout<<endl;
+        cout<<"Kartu Anda   = "; printhand(ownhand);
+    }
+
 int main() {
+    system("CLS");
     vector <string> deck = generate_deck();
     deck = shuffle_card(deck);
     bool replay = false;
@@ -96,109 +106,164 @@ int main() {
         }
     
    
-    sort(plyhand.begin(), plyhand.end(), assign_value);
     
-     for (int j = 0 ; j <= 6 ; j++)
-        {
-            cout<<plyhand[j]<<" ";
-        }
-    cout<<endl;
-
  
     string kartu;
 
-//player turn
-    atas:
-    cout<<"Pilih kartu yang mau diminta "<<endl;
-    cin>>(kartu);
-    transform(kartu.begin(), kartu.end(), kartu.begin(), ::toupper);
-    auto cekply = find(plyhand.begin(), plyhand.end(), (kartu));
-    if (cekply == plyhand.end())
-        {
-            goto atas;
-        }
+while ((deck.size() != 0 ) || (plyhand.size() != 0) || (opphand.size() != 0))
+    {
+    //player turn
 
+        atas:
+        system("CLS");
+        sort(plyhand.begin(), plyhand.end(), assign_value);
+        
+        interface_gf(plyhand, opphand, deck);
 
-    auto cekopp = find(opphand.begin(), opphand.end(), (kartu));
-    if (cekopp != opphand.end())
-        { 
-            int sz = opphand.size();
-            int j = 0;
-            for (j = 0 ; j < sz ; j++)
-                {
-                    
-                    if (kartu == opphand[j]) 
-                        {
-                            plyhand.push_back(kartu);
-                            auto removeIt =remove_if(opphand.begin(), opphand.end(), [&](const string& word) { return word == kartu; });
-                            opphand.erase(removeIt,opphand.end());
-
-                            replay = true;
-
-                        }
-                }
-        } 
-    else
-        {
-            plyhand.push_back(deck[0]);
-            deck.erase(deck.begin());
-            cout<<"GO FISH!!" << endl;
-            goto nexturn;
-            
-        }
-    
-    plyhand = cekfour(plyhand);
-    sort(plyhand.begin(), plyhand.end(), assign_value);
-
-    for (int j = 0 ; j < plyhand.size() ; j++)
-        {
-            cout<<plyhand[j]<<" ";
-        }
-
-    
-    cout<<endl;
-    
-    cout<<"size opp : " << opphand.size()<<endl;
-
-     if (replay == true)
-        goto atas;
-
-    nexturn:
-    
-
-
-//opp turn
-
-    int y = 0;
-    string oppchosen;
-    string *ptroppchosen;
-    ptroppchosen = &oppchosen;
-    unordered_map <string, int> oppcard;
-
-        for (const auto card : (opphand)) 
+        cout<<endl;
+        cout<<"Pilih kartu yang mau diminta "<<endl;
+        cin>>(kartu);
+        transform(kartu.begin(), kartu.end(), kartu.begin(), ::toupper);
+        auto cekply = find(plyhand.begin(), plyhand.end(), (kartu));
+        if (cekply == plyhand.end())
             {
-                oppcard[card]++;
+                goto atas;
             }
 
-        for (const auto pair : oppcard)
-            {
-                if (pair.second >= 1) 
+
+        auto cekopp = find(opphand.begin(), opphand.end(), (kartu));
+        if (cekopp != opphand.end())
+            { 
+                int sz = opphand.size();
+                int j = 0;
+                for (j = 0 ; j < sz ; j++)
                     {
-                        if (y >= pair.second)
-                            {
-                                y = pair.second;
-                                oppchosen = pair.first; 
-                            }
                         
+                        if (kartu == opphand[j]) 
+                            {
+                                plyhand.push_back(kartu);
+                                auto removeIt =remove_if(opphand.begin(), opphand.end(), [&](const string& word) { return word == kartu; });
+                                opphand.erase(removeIt,opphand.end());
+
+                                replay = true;
+
+                            }
+                    }
+            } 
+        else if (kartu == deck[0])
+            {
+                plyhand.push_back(deck[0]);
+                deck.erase(deck.begin());
+                printf ("Anda mengambil kartu %s dari deck", kartu);
+                replay = true;
+            }
+        
+        else
+            {   
+                plyhand.push_back(deck[0]);
+                deck.erase(deck.begin());
+                cout<<"GO FISH!!" << endl;
+                goto nexturn;
+                
+            }
+        
+        system("CLS");
+        plyhand = cekfour(plyhand);
+
+        interface_gf(plyhand, opphand, deck);
+        cout<<endl;
+
+       
+        if (replay == true)
+            goto atas;
+
+        nexturn:
+
+        system("pause");
+        system("CLS");
+
+        interface_gf(plyhand, opphand, deck);
+        cout<<endl;
+    //opp turn
+
+        int y = 0;
+        bool replayopp = false;
+        string oppchosen;
+        string *ptroppchosen;
+        ptroppchosen = &oppchosen;
+        unordered_map <string, int> oppcard;
+
+            for (const auto card : (opphand)) 
+                {
+                    oppcard[card]++;
+                }
+
+            for (const auto pair : oppcard)
+                {
+                    if (pair.second >= 3)
+                    {
+                        oppchosen=pair.first;
+                    } 
+                    else if (pair.second >= 2)
+                    {
+                        oppchosen=pair.first;
+                    }
+                    else
+                    {
+                        oppchosen=opphand[0];
+                    }
+                }
+
+        cout<<endl;
+        cout<<"Lawan memilih kartu "<<*ptroppchosen<<endl;
+        cout<<endl;
+        system("pause");
+        
+
+                int pz = plyhand.size();
+                for (int k = 0 ; k < pz ; k++)
+                    {
+                        
+                        if (oppchosen == plyhand[k]) 
+                            {
+                                plyhand.push_back(oppchosen);
+                                auto removeIt =remove_if(plyhand.begin(), plyhand.end(), [&](const string& word) { return word == oppchosen; });
+                                plyhand.erase(removeIt,plyhand.end());
+
+                                replayopp = true;
+
+                            }
+                        else if (oppchosen == deck[0])
+                            {
+                                opphand.push_back(deck[0]);
+                                deck.erase(deck.begin());
+                                printf ("Lawan mengambil kartu %s dari deck", oppchosen);
+                                system("pause");
+                                replay = true;
+                            }
                         else
                             {
-                                continue;
+                                opphand.push_back(deck[0]);
+                                deck.erase(deck.begin());
+                                cout<<"GO FISH!!" << endl;
+                                system("pause");
+                                goto atas;
+                                
                             }
-                        
                     }
+            
+        
+        opphand = cekfour(opphand);
 
+        for (int j = 0 ; j < opphand.size() ; j++)
+            {
+                cout<<opphand[j]<<" ";
             }
+        cout<<endl;
 
-    cout<<"Lawan memilih kartu "<<oppchosen<<endl;
+        if (replayopp == true)
+            goto nexturn;
+
+    }
 
 }
