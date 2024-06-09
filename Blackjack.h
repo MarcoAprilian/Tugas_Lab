@@ -100,7 +100,7 @@ auto interfaceplayer(vector <int> ph)
             cout<<ph[i]<<" ";
             total += ph[i];
         }
-    cout << "(Total = " << total << ")";
+    cout << "      (Total = " << total << ")";
 
         cout << endl;  
 }
@@ -244,7 +244,7 @@ void Blackjack()
 
     gameover:
 
-    cout << "   BANGKRUT SUDAH" << endl;
+    cout << "   BANGKRUT SUDAH :(" << endl;
     garis();
 
         system("pause");
