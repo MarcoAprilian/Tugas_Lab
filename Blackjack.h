@@ -100,7 +100,7 @@ auto interfaceplayer(vector <int> ph)
             cout<<ph[i]<<" ";
             total += ph[i];
         }
-    cout << "      (Total = " << total << ")";
+    cout << "(Total = " << total << ")";
 
         cout << endl;  
 }
@@ -134,7 +134,6 @@ auto interfacedealer(vector <int> dh, bool cond)
 
 void Blackjack()
 {   
-    ulang:
     
     tampilanUtama_Blackjack();
 
@@ -142,6 +141,7 @@ void Blackjack()
     int *ptruang = &uang;
     int bet;
 
+    ulang:
     deck_struct card;
 
     bool cd = false;
@@ -208,18 +208,9 @@ void Blackjack()
                 
                 interfaceplayer(playerhand);
                 interfacedealer(dealerhand, cd);
-                checkwin(sumph, sumdh, ptruang, bet); 
+                checkwin(sumph, sumdh, ptruang, bet);
 
-                if (*ptruang <= 0) goto gameover;
-
-                    garis();
-
-                cout << endl << "Your Point = " << *ptruang << endl;
-
-                    cout << endl;
-                    system("pause");
-
-                goto gameover;
+                goto again;
             }
 
         system("CLS");
@@ -233,26 +224,20 @@ void Blackjack()
     if (sumph < 21) goto hit;
 
     checkwin(sumph, sumdh, ptruang, bet);
-    if (*ptruang <= 0) goto gameover;
-        
-        garis();
-        
-    cout << endl << "Your Credit= " << *ptruang << endl;
-    cout << endl;
-    
-        system("pause");
-
-    gameover:
-
-    cout << "   BANGKRUT SUDAH :(" << endl;
-    garis();
-
-        system("pause");
-        system("CLS");
-        UI_Blackjack();
 
     char lagi;
 
+    again:
+
+        garis();
+        system("pause");
+        system("CLS");
+        UI_Blackjack();
+        
+    cout << "Your Credit = " << *ptruang << endl;
+    if (*ptruang <= 0) cout << "BANGKRUT SUDAH" << endl;
+
+        garis();
     cout << "                                Play Again ???? "    << endl;
     cout << "                            Yes(Y)            No(N)" << endl;
 
@@ -267,6 +252,6 @@ void Blackjack()
 
             GameOver();
         } 
-    else goto gameover;
+    else goto again;
 }
 #endif
