@@ -131,19 +131,19 @@ void manual_GoFish()
     cout << "|| kartu dengan nilai yang sama sebanyak empat buah (fullset).                   ||" << endl;
     cout << endl;
     cout << "|| Cara Main :                                                                   ||" << endl;
-    cout << "||  1. Player dan bot masing-masing mendapatkan tujuh buah kartu.                ||" << endl;
+    cout << "||  1. Awalnya player dan lawan masing-masing mendapatkan tujuh buah kartu       ||" << endl;
     cout << "||  2. Player akan kesempatan untuk memilih kartu yang diinginkan.               ||" << endl;
-    cout << "||  3. Jika kartu yang diminta terdapat di kartu lawan (bot), maka kartu         ||" << endl;
+    cout << "||  3. Jika kartu yang diminta terdapat di tangan lawan (bot), maka kartu        ||" << endl;
     cout << "||     akan dipindahkan ke tangan player dan player mendapatkan extra turn.      ||" << endl;
     cout << "||  4. Jika kartu yang diminta tidak terdapat di kartu lawan (Go Fish), maka     ||" << endl;
-    cout << "||     player akan mendapatkan kartu random dari deck. Jika kartu yang diminta   ||" << endl;
-    cout << "||     sama dengan kartu yang didapatkan dari deck, maka player mendapatkan      ||" << endl;
+    cout << "||     player akan mencabut kartu dari atas deck. Jika kartu yang diminta        ||" << endl;
+    cout << "||     sama dengan kartu yang didapatkan dari deck, maka player akan mendapatkan ||" << endl;
+    cout << "||     extra turn.                                                               ||" << endl;
     cout << "||  5. Jika terdapat empat buah kartu dengan nilai yang sama di tangan player,   ||" << endl;
-    cout << "||     maka empat kartu tersebut diambil dari tangan player dan player           ||" << endl;
-    cout << "||     mendapatkan poin sebanyak satu.                                           ||" << endl;
-    cout << "||  6. Setelah giliran player habis, bot akan bermain dengan ketentuan yang      ||" << endl;
-    cout << "||     sama dengan cara bermain player.                                          ||" << endl;
-    cout << "||  7. Jika kartu di deck habis ataupun kartu di tangan player/bot habis, maka   ||" << endl;
+    cout << "||     maka empat kartu tersebut dibuang dan player mendapatkan satu poin.       ||" << endl;
+    cout << "||  6. Setelah giliran player habis, lawan akan bermain dengan ketentuan yang    ||" << endl;
+    cout << "||     sama.                                                                     ||" << endl;
+    cout << "||  7. Jika kartu di deck habis ataupun kartu di tangan player/lawan habis, maka ||" << endl;
     cout << "||     game berakhir dan pemain dengan poin terbanyak lah yang menang.           ||" << endl;
 
         garis();
