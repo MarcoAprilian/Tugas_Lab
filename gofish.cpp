@@ -62,6 +62,7 @@ vector <string> cekfour (vector <string> hand, int *poin )
                         auto removeIt =remove_if(hand.begin(), hand.end(), [&](const string& word) { return word == pasang.first; });
                         hand.erase(removeIt,hand.end());
 
+                        cout<<"Menyelesaikan 1 set "<<pasang.first;
                         *poin += 1;
                     }
 
@@ -137,7 +138,7 @@ while ((deck.size() != 0 ) || (plyhand.size() != 0) || (opphand.size() != 0))
         interface_gf(plyhand, opphand, deck, *ptroppoint, *ptrplypoint);
 
         cout<<endl;
-        cout<<"Pilih kartu yang mau diminta "<<endl;
+        cout<<"Pilih kartu yang mau diminta ";
         cin>>(kartu);
         transform(kartu.begin(), kartu.end(), kartu.begin(), ::toupper);
         auto cekply = find(plyhand.begin(), plyhand.end(), (kartu));
@@ -160,7 +161,10 @@ while ((deck.size() != 0 ) || (plyhand.size() != 0) || (opphand.size() != 0))
                                 plyhand.push_back(kartu);
                                 auto removeIt =remove_if(opphand.begin(), opphand.end(), [&](const string& word) { return word == kartu; });
                                 opphand.erase(removeIt,opphand.end());
-                                printf ("Anda mengambil kartu %s dari tangan lawan", kartu);
+                                cout << "Anda mengambil kartu " << kartu << " dari tangan lawan" << endl;
+                                system("pause");
+                                plyhand = cekfour(plyhand, &plypoint);
+                                system("pause");
                                 replay = true;
 
                             }
@@ -170,7 +174,11 @@ while ((deck.size() != 0 ) || (plyhand.size() != 0) || (opphand.size() != 0))
             {
                 plyhand.push_back(deck[0]);
                 deck.erase(deck.begin());
-                printf ("Anda mengambil kartu %s dari deck", kartu);
+                cout << "Anda mengambil kartu " << kartu << " dari deck" << endl;
+                system("pause");
+                plyhand = cekfour(plyhand, &plypoint);
+                system("pause");
+                
                 replay = true;
             }
         
@@ -179,13 +187,15 @@ while ((deck.size() != 0 ) || (plyhand.size() != 0) || (opphand.size() != 0))
                 plyhand.push_back(deck[0]);
                 deck.erase(deck.begin());
                 cout<<"GO FISH!!" << endl;
+                system("pause");
+                plyhand = cekfour(plyhand, &plypoint);
+                system("pause");
                 goto nexturn;
                 
             }
         
         system("CLS");
-        plyhand = cekfour(plyhand, &plypoint);
-
+ 
         interface_gf(plyhand, opphand, deck, *ptroppoint, *ptrplypoint);
         cout<<endl;
         printhand(opphand);
@@ -251,7 +261,9 @@ while ((deck.size() != 0 ) || (plyhand.size() != 0) || (opphand.size() != 0))
                                         opphand.push_back(*ptroppchosen);
                                         auto removeIt =remove_if(plyhand.begin(), plyhand.end(), [&](const string& word) { return word == *ptroppchosen; });
                                         plyhand.erase(removeIt,plyhand.end());
-                                        printf ("Lawan mengambil kartu %s dari tangan anda", *ptroppchosen);
+                                        cout<< "Lawan mengambil kartu " << *ptroppchosen << " dari tangan anda" <<endl;
+                                        opphand = cekfour(opphand, &oppoint);
+                                        system("pause");
                                         replayopp = true;
 
                                     }
@@ -261,7 +273,9 @@ while ((deck.size() != 0 ) || (plyhand.size() != 0) || (opphand.size() != 0))
                     {
                         opphand.push_back(deck[0]);
                         deck.erase(deck.begin());
-                        printf ("Lawan mengambil kartu %s dari deck", *ptroppchosen);
+                        cout<< "Lawan mengambil kartu " << *ptroppchosen << " dari deck"<<endl;
+                        system("pause");
+                        opphand = cekfour(opphand, &oppoint);
                         system("pause");
                         replayopp = true;
                     }
@@ -272,11 +286,14 @@ while ((deck.size() != 0 ) || (plyhand.size() != 0) || (opphand.size() != 0))
                         deck.erase(deck.begin());
                         cout<<"GO FISH!!" << endl;
                         system("pause");
+                        opphand = cekfour(opphand, &oppoint);
+                        system("pause");
                         goto atas;
                         
                     }
         
         opphand = cekfour(opphand, &oppoint);
+        system("pause");
 
         for (int j = 0 ; j < opphand.size() ; j++)
             {
