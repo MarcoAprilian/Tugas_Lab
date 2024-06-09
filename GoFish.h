@@ -338,8 +338,8 @@ auto GoFish()
     endgame:
 
         cout << endl << endl;
-    cout << "Poin anda    = " << *ptroppoint << endl;
-    cout << "Poin lawan   = " << *ptrplypoint << endl;
+    cout << "Poin anda    = " << *ptrplypoint << endl;
+    cout << "Poin lawan   = " << *ptroppoint << endl;
         garis();
 
     if (*ptrplypoint > *ptroppoint) cout << "                                YOU WIN !!" << endl;
