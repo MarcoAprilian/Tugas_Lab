@@ -45,7 +45,7 @@ vector <string> shuffle_card(vector<string>deck)
         return deck;
     }
 
-vector <string> cekfour (vector <string> hand )
+vector <string> cekfour (vector <string> hand, int *poin )
     {
         unordered_map <string, int> count;
 
@@ -60,6 +60,8 @@ vector <string> cekfour (vector <string> hand )
                     {
                         auto removeIt =remove_if(hand.begin(), hand.end(), [&](const string& word) { return word == pasang.first; });
                         hand.erase(removeIt,hand.end());
+
+                        *poin += 1;
                     }
 
             }
@@ -80,11 +82,19 @@ int handsize(vector <string> hand)
         return x;
     }
 
-void interface_gf (vector <string> ownhand, vector <string> opohand, vector <string> dek)
+void interface_gf (vector <string> ownhand, vector <string> opohand, vector <string> dek, int poinlawan, int poinown)
     {
-        cout<<"Tangan lawan = " << opohand.size() << "          " << "Deck = " << dek.size();
         cout<<endl;
-        cout<<"Kartu Anda   = "; printhand(ownhand);
+        cout<<"Tangan lawan = " << opohand.size() << "          " << "Poin lawan = " << poinlawan;
+        cout<<endl;
+        cout<<endl;
+        cout<<"Kartu anda   = "; printhand(ownhand);
+        cout<<endl;
+        cout<<"Poin anda    = " << poinown << endl;
+        cout<<endl;
+        cout<<"Deck         = " << dek.size();
+        cout<<endl;
+        
     }
 
 int main() {
@@ -103,12 +113,17 @@ int main() {
             deck.erase(deck.begin());
             opphand.push_back(deck[0]);
             deck.erase(deck.begin());            
-        }
-    
-   
-    
- 
+        }    
+
     string kartu;
+
+    int plypoint = 0;
+    int *ptrplypoint;
+    ptrplypoint = &plypoint;
+
+    int oppoint = 0;
+    int *ptroppoint;
+    ptroppoint = &oppoint;
 
 while ((deck.size() != 0 ) || (plyhand.size() != 0) || (opphand.size() != 0))
     {
@@ -118,7 +133,7 @@ while ((deck.size() != 0 ) || (plyhand.size() != 0) || (opphand.size() != 0))
         system("CLS");
         sort(plyhand.begin(), plyhand.end(), assign_value);
         
-        interface_gf(plyhand, opphand, deck);
+        interface_gf(plyhand, opphand, deck, *ptroppoint, *ptrplypoint);
 
         cout<<endl;
         cout<<"Pilih kartu yang mau diminta "<<endl;
@@ -168,9 +183,9 @@ while ((deck.size() != 0 ) || (plyhand.size() != 0) || (opphand.size() != 0))
             }
         
         system("CLS");
-        plyhand = cekfour(plyhand);
+        plyhand = cekfour(plyhand, &plypoint);
 
-        interface_gf(plyhand, opphand, deck);
+        interface_gf(plyhand, opphand, deck, *ptroppoint, *ptrplypoint);
         cout<<endl;
 
        
@@ -182,7 +197,7 @@ while ((deck.size() != 0 ) || (plyhand.size() != 0) || (opphand.size() != 0))
         system("pause");
         system("CLS");
 
-        interface_gf(plyhand, opphand, deck);
+        interface_gf(plyhand, opphand, deck, *ptroppoint, *ptrplypoint);
         cout<<endl;
     //opp turn
 
@@ -253,7 +268,7 @@ while ((deck.size() != 0 ) || (plyhand.size() != 0) || (opphand.size() != 0))
                     }
             
         
-        opphand = cekfour(opphand);
+        opphand = cekfour(opphand, &oppoint);
 
         for (int j = 0 ; j < opphand.size() ; j++)
             {
