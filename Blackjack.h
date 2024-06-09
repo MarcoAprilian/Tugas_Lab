@@ -156,6 +156,7 @@ void Blackjack()
     bet = *ptruang + 1;
     while (bet > *ptruang)
         {
+                system("CLS");
                 UI_Blackjack();    
 
             cout << "Your Point = " << *ptruang << endl;
