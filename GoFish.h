@@ -11,7 +11,6 @@
 #include <cctype>
 #include <string>
 #include "UI.h"
-#include "blackjack.h"
 
 using namespace std;
 
