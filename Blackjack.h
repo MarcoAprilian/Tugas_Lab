@@ -236,7 +236,12 @@ void Blackjack()
         UI_Blackjack();
         
     cout << "Your Credit = " << *ptruang << endl;
-    if (*ptruang <= 0) cout << "BANGKRUT SUDAH" << endl;
+    if (*ptruang <= 0)
+        {
+         cout << "BANGKRUT SUDAH" << endl;
+         goto end;
+        }
+    
 
         garis();
     cout << "                                Play Again ???? "    << endl;
@@ -249,10 +254,12 @@ void Blackjack()
     if (tolower(lagi) == 'y') goto ulang;
     else if (tolower(lagi) == 'n')
         {
+            end:
                 system("pause");
 
             GameOver();
         } 
     else goto again;
+
 }
 #endif
