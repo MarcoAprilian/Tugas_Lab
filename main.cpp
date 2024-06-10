@@ -8,7 +8,8 @@ using namespace std;
 
 int main() 
 {
-    char pilihan;
+    int pilihan;
+    int arr[2] = {1,2};
 
     ulang:
 
@@ -30,9 +31,9 @@ int main()
     cout << "||                                                                      credits = (1)  || " << endl;
     cout << "  =====================================================================================   " << endl;    
     cout << "                                   Pilihan Anda : ";
-    pilihan = _getch();
+    cin >> pilihan;
 
-    if (pilihan == '1') Blackjack();
-    else if (pilihan == '2') GoFish();
+    if (pilihan == arr[0]) Blackjack();
+    else if (pilihan == arr[1]) GoFish();
     else goto ulang;
 }
