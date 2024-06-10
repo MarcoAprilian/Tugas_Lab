@@ -17,7 +17,7 @@ Output program :
 
 ![image](https://github.com/MarcoAprilian/Tugas_Lab/assets/37434865/5a658a91-d913-48ee-a289-512de950b66a)
 
-![image](https://github.com/MarcoAprilian/Tugas_Lab/assets/37434865/5124ee52-8b4d-44ce-bff8-9006a7173ac0)
+![image](https://github.com/MarcoAprilian/Tugas_Lab/assets/37434865/26f50536-8e65-40df-8aa7-ba7213b55e6c)
 
 ![image](https://github.com/MarcoAprilian/Tugas_Lab/assets/37434865/8eca8140-8ce0-4d91-b397-28eeb4287d37)
 
