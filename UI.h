@@ -53,7 +53,8 @@ void manual_Blackjack()
 
 auto tampilanUtama_Blackjack()
 {
-    char pilihan;
+    int pilihan;
+    int arr[2] = {1,2};
 
     ulang:
 
@@ -92,10 +93,10 @@ auto tampilanUtama_Blackjack()
     cout << "      ||   2. How to Play                                            ||" << endl;
     cout << "        =============================================================  " << endl;
     cout << "                                Pilihan Anda : ";
-    pilihan = _getch();
+    cin >> pilihan;
 
-    if (pilihan == '1') return 0;
-    else if (pilihan == '2')
+    if (pilihan == arr[0]) return 0;
+    else if (pilihan == arr[1])
         {
             manual_Blackjack();
 
@@ -152,7 +153,8 @@ void manual_GoFish()
 
 auto tampilanUtama_GoFish()
 {
-    char pilihan;
+    int pilihan;
+    int arr[2] = {1,2};
 
     ulang:
 
@@ -200,10 +202,10 @@ auto tampilanUtama_GoFish()
     cout << "                                   ||   2. How to Play                                            ||" << endl;
     cout << "                                    =============================================================   " << endl;
     cout << "                                                              Pilihan Anda : ";
-    pilihan = _getch();
+    cin >> pilihan;
 
-    if (pilihan == '1') return 0;
-    else if (pilihan == '2')
+    if (pilihan == arr[0]) return 0;
+    else if (pilihan == arr[1])
         {
             manual_GoFish();
 
